@@ -432,6 +432,18 @@
                                         <PieChart className="w-4 h-4" />
                                         Análise
                                     </button>
+                                    <button
+                                        onClick={() => netlifyIdentity.logout()}
+                                        className="flex items-center gap-2 px-4 py-2 rounded-lg text-red-600 hover:bg-red-50 transition-all border border-red-200 ml-4"
+                                        title="Sair do sistema"
+                                    >
+                                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                            <polyline points="16 17 21 12 16 7"></polyline>
+                                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                                        </svg>
+                                        Sair
+                                    </button>
                                 </div>
 
                                 {/* Mobile Menu Button */}
@@ -478,6 +490,17 @@
                                     >
                                         <PieChart className="w-4 h-4" />
                                         Análise
+                                    </button>
+                                    <button
+                                        onClick={() => netlifyIdentity.logout()}
+                                        className="w-full flex items-center gap-2 px-4 py-2 rounded-lg text-red-600 hover:bg-red-50 transition-all border border-red-200 mt-4"
+                                    >
+                                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                            <polyline points="16 17 21 12 16 7"></polyline>
+                                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                                        </svg>
+                                        Sair
                                     </button>
                                 </div>
                             )}
@@ -573,7 +596,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         {/* Fevereiro */}
                                         <div className="bg-white/50 rounded-xl p-6 border border-gray-300">
                                             <div className="flex items-center justify-between mb-4">
