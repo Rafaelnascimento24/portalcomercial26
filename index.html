@@ -97,18 +97,171 @@
         const { useState, useEffect, useMemo, useRef } = React;
 
         // DADOS DA PLANILHA
-        const DADOS_COMPLETOS = {"janeiro": {"semanas": [{"nome": "Semana 1", "periodo": "02/01 a 09/01"}, {"nome": "Semana 2", "periodo": "12/01 a 16/01"}, {"nome": "Semana 3", "periodo": "19/01 a 23/01"}, {"nome": "Semana 4", "periodo": "26/01 a 30/01"}], "fechamentos": [{"semana": "Semana 1", "cliente": "CAMAP", "pol": "SSZ", "pod": "DURBAN", "cntr": 2, "profit": 374.0, "armador": "HAPAG"}, {"semana": "Semana 3", "cliente": "BEATRICE", "pol": "PNG", "pod": "SAINT PETERSBURG", "cntr": 10, "profit": 4550.0, "armador": "MSC"}, {"semana": "Semana 1", "cliente": "CASUL", "pol": "SSZ", "pod": "QINGDAO", "cntr": 10, "profit": 4290.0, "armador": "MAERSK"}, {"semana": "Semana 3", "cliente": "CASUL", "pol": "SSZ", "pod": "QINGDAO", "cntr": 10, "profit": 1360.0, "armador": "MSC"}, {"semana": "Semana 1", "cliente": "CASUL", "pol": "SSZ", "pod": "QINGDAO", "cntr": 10, "profit": 4090.0, "armador": "MAERSK"}, {"semana": "Semana 3", "cliente": "GBC", "pol": "SSZ", "pod": "ALGIERS", "cntr": 5, "profit": 725.0, "armador": "MSC"}, {"semana": "Semana 1", "cliente": "MGV", "pol": "SSZ", "pod": "QINGDAO", "cntr": 4, "profit": 1936.0, "armador": "MSC"}, {"semana": "Semana 3", "cliente": "MGV", "pol": "SSZ", "pod": "QINGDAO", "cntr": 1, "profit": 270.0, "armador": "PIL"}, {"semana": "Semana 1", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "TALLINN", "cntr": 8, "profit": 1920.0, "armador": "MSC"}, {"semana": "Semana 3", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "TALLINN", "cntr": 3, "profit": 708.0, "armador": "MSC"}, {"semana": "Semana 1", "cliente": "MGV", "pol": "SSZ", "pod": "SAINT PETERSBURG (FOB)", "cntr": 2, "profit": 883.0, "armador": "MSC"}, {"semana": "Semana 3", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "GYDNIA", "cntr": 4, "profit": 1560.0, "armador": "MSC"}, {"semana": "Semana 1", "cliente": "DEGAN", "pol": "SSZ", "pod": "BUENAVENTURA", "cntr": 4, "profit": 808.0, "armador": "CMA"}, {"semana": "Semana 3", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "TALLINN", "cntr": 2, "profit": 472.0, "armador": "MSC"}, {"semana": "Semana 1", "cliente": "COPLANA", "pol": "SSZ", "pod": "CALLAO", "cntr": 1, "profit": 2140.0, "armador": "MAERSK"}, {"semana": "Semana 3", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "DURBAN", "cntr": 3, "profit": 1611.0, "armador": "HAPAG"}, {"semana": "Semana 1", "cliente": "MGV", "pol": "SSZ", "pod": "CONSTANTA", "cntr": 2, "profit": 850.0, "armador": "MSC"}, {"semana": "Semana 3", "cliente": "COPLANA", "pol": "SSZ", "pod": "POTI", "cntr": 1, "profit": 240.0, "armador": "MSC"}, {"semana": "Semana 1", "cliente": "STEFENONI", "pol": "VIX", "pod": "KARACHI", "cntr": 1, "profit": 616.0, "armador": "MAERSK"}, {"semana": "Semana 3", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "GDANSK", "cntr": 3, "profit": 870.0, "armador": "MSC"}, {"semana": "Semana 1", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "CONSTANTA", "cntr": 2, "profit": 850.0, "armador": "MSC"}, {"semana": "Semana 3", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "HAMBURG", "cntr": 1, "profit": 340.0, "armador": "MSC"}, {"semana": "Semana 1", "cliente": "MGV", "pol": "SSZ", "pod": "CONSTANTA", "cntr": 6, "profit": 6642.0, "armador": "MAERSK"}, {"semana": "Semana 3", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "SAINT PETERSBURG", "cntr": 2, "profit": 1105.0, "armador": "MSC"}, {"semana": "Semana 1", "cliente": "MGV", "pol": "SSZ", "pod": "KLAIPEDA", "cntr": 2, "profit": 168.0, "armador": "MAERSK"}, {"semana": "Semana 3", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "ROTTERDAM", "cntr": 2, "profit": 680.0, "armador": "MSC"}, {"semana": "Semana 1", "cliente": "BEATRICE", "pol": "PNG", "pod": "MERSIN", "cntr": 2, "profit": 298.0, "armador": "MSC"}, {"semana": "Semana 3", "cliente": "COPLANA", "pol": "SSZ", "pod": "CONSTANTA", "cntr": 2, "profit": 480.0, "armador": "MSC"}, {"semana": "Semana 1", "cliente": "COPLANA", "pol": "SSZ", "pod": "ROTTERDAM (FOB)", "cntr": 4, "profit": 1941.0, "armador": "MSC"}, {"semana": "Semana 3", "cliente": "CAP", "pol": "SSZ", "pod": "RIGA", "cntr": 3, "profit": 360.0, "armador": "MSC"}, {"semana": "Semana 1", "cliente": "BEATRICE", "pol": "PNG", "pod": "VALENCIA", "cntr": 1, "profit": 55.0, "armador": "MSC"}, {"semana": "Semana 3", "cliente": "INTER LOGGING", "pol": "SSZ", "pod": "TALLINN (FOB)", "cntr": 8, "profit": 800.0, "armador": "MAERSK"}, {"semana": "Semana 1", "cliente": "BEATRICE", "pol": "PNG", "pod": "VALENCIA", "cntr": 9, "profit": 495.0, "armador": "MSC"}, {"semana": "Semana 3", "cliente": "AMENCO", "pol": "SSZ", "pod": "DURBAN", "cntr": 4, "profit": 748.0, "armador": "HAPAG"}, {"semana": "Semana 1", "cliente": "CASUL", "pol": "SSZ", "pod": "QINGDAO", "cntr": 10, "profit": 1700.0, "armador": "PIL"}, {"semana": "Semana 3", "cliente": "AMENCO", "pol": "SSZ", "pod": "CONSTANTA", "cntr": 2, "profit": 108.0, "armador": "HAPAG"}, {"semana": "Semana 1", "cliente": "BEATRICE", "pol": "PNG", "pod": "SAINT PETERSBURG", "cntr": 3, "profit": 1360.0, "armador": "MSC"}, {"semana": "Semana 3", "cliente": "BEATRICE", "pol": "PNG", "pod": "VALENCIA", "cntr": 5, "profit": 275.0, "armador": "MSC"}, {"semana": "Semana 1", "cliente": "COPLANA", "pol": "SSZ", "pod": "ROTTERDAM", "cntr": 2, "profit": 1407.0, "armador": "MSC"}, {"semana": "Semana 3", "cliente": "CAMAP", "pol": "SSZ", "pod": "ALGIERS", "cntr": 5, "profit": 1000.0, "armador": "MSC"}, {"semana": "Semana 1", "cliente": "COPLANA", "pol": "SSZ", "pod": "BUENAVENTURA", "cntr": 2, "profit": 1327.0, "armador": "CMA"}, {"semana": "Semana 3", "cliente": "COPLANA", "pol": "SSZ", "pod": "TALLINN (FOB)", "cntr": 5, "profit": 500.0, "armador": "MAERSK"}, {"semana": "Semana 1", "cliente": "DEGAN", "pol": "SSZ", "pod": "BUENAVENTURA", "cntr": 1, "profit": 218.0, "armador": "CMA"}, {"semana": "Semana 1", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "TALLINN", "cntr": 3, "profit": 708.0, "armador": "MSC"}, {"semana": "Semana 2", "cliente": "STEFENONI", "pol": "PNG", "pod": "JEDDAH", "cntr": 1, "profit": 263.0, "armador": "MAERSK"}, {"semana": "Semana 2", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "TALLINN", "cntr": 4, "profit": 960.0, "armador": "MSC"}, {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "DURBAN", "cntr": 4, "profit": 2148.0, "armador": "HAPAG"}, {"semana": "Semana 2", "cliente": "CAP", "pol": "SSZ", "pod": "KLAIPEDA", "cntr": 1, "profit": 120.0, "armador": "MSC"}, {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "SAINT PETERSBURG", "cntr": 2, "profit": 1105.0, "armador": "MSC"}, {"semana": "Semana 2", "cliente": "COPLANA", "pol": "SSZ", "pod": "NOVOROSSIYSK", "cntr": 6, "profit": 7118.0, "armador": "MSC"}, {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "LONDON GATEWAY", "cntr": 1, "profit": 290.0, "armador": "MSC"}, {"semana": "Semana 2", "cliente": "CAP", "pol": "SSZ", "pod": "TALLINN", "cntr": 2, "profit": 240.0, "armador": "MSC"}, {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "VALENCIA", "cntr": 1, "profit": 340.0, "armador": "MSC"}, {"semana": "Semana 2", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "TALLINN", "cntr": 2, "profit": 472.0, "armador": "MSC"}, {"semana": "Semana 4", "cliente": "CONNECT", "pol": "SSZ", "pod": "BRISBANE (FOB)", "cntr": 1, "profit": 200.0, "armador": "MAERSK"}, {"semana": "Semana 2", "cliente": "COPLANA", "pol": "SSZ", "pod": "SAINT PETERSBURG", "cntr": 3, "profit": 6039.0, "armador": "MSC"}, {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "ROTTERDAM", "cntr": 6, "profit": 2040.0, "armador": "MSC"}, {"semana": "Semana 2", "cliente": "COPLANA", "pol": "SSZ", "pod": "NOVOROSSIYSK", "cntr": 1, "profit": 1203.0, "armador": "MSC"}, {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "SAINT PETERSBURG", "cntr": 3, "profit": 1645.0, "armador": "MSC"}, {"semana": "Semana 2", "cliente": "INTER LOGGING", "pol": "SSZ", "pod": "TALLINN (FOB)", "cntr": 4, "profit": 400.0, "armador": "MAERSK"}, {"semana": "Semana 4", "cliente": "CAP", "pol": "SSZ", "pod": "KLAIPEDA", "cntr": 1, "profit": 120.0, "armador": "MSC"}, {"semana": "Semana 2", "cliente": "CAP", "pol": "SSZ", "pod": "TALLINN", "cntr": 13, "profit": 1560.0, "armador": "MSC"}, {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "BUENAVENTURA", "cntr": 3, "profit": 2700.0, "armador": "COSCO"}, {"semana": "Semana 2", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "ROTTERDAM", "cntr": 18, "profit": 1800.0, "armador": "MSC"}, {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "GDANSK", "cntr": 4, "profit": 1160.0, "armador": "MSC"}, {"semana": "Semana 2", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "POTI", "cntr": 4, "profit": 1610.0, "armador": "MSC"}, {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "ROTTERDAM", "cntr": 1, "profit": 340.0, "armador": "MSC"}, {"semana": "Semana 2", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "THESSALONIKI", "cntr": 2, "profit": 600.0, "armador": "MAERSK"}, {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "DURBAN", "cntr": 3, "profit": 1611.0, "armador": "HAPAG"}, {"semana": "Semana 2", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "TALLINN", "cntr": 4, "profit": 960.0, "armador": "MSC"}, {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "CONSTANTA", "cntr": 3, "profit": 1194.0, "armador": "HAPAG"}, {"semana": "Semana 2", "cliente": "DEGAN", "pol": "SSZ", "pod": "BUENAVENTURA", "cntr": 1, "profit": 218.0, "armador": "CMA"}, {"semana": "Semana 4", "cliente": "GBC", "pol": "SSZ", "pod": "DURBAN", "cntr": 2, "profit": 374.0, "armador": "HAPAG"}, {"semana": "Semana 4", "cliente": "COPLANA", "pol": "SSZ", "pod": "NOVOROSSIYSK", "cntr": 1, "profit": 1203.0, "armador": "MSC"}, {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "ROTTERDAM", "cntr": 6, "profit": 2616.0, "armador": "MSC"}, {"semana": "Semana 4", "cliente": "CAP", "pol": "SSZ", "pod": "RIGA", "cntr": 2, "profit": 240.0, "armador": "MSC"}, {"semana": "Semana 4", "cliente": "BEATRICE", "pol": "PNG", "pod": "SAINT PETERSBURG", "cntr": 7, "profit": 3190.0, "armador": "MSC"}, {"semana": "Semana 4", "cliente": "GBC", "pol": "SSZ", "pod": "ALGIERS", "cntr": 5, "profit": 725.0, "armador": "MSC"}, {"semana": "Semana 4", "cliente": "COPLANA", "pol": "SSZ", "pod": "CALLAO", "cntr": 1, "profit": 1200.0, "armador": "MAERSK"}, {"semana": "Semana 2", "cliente": "META MENSAL", "pol": "180000", "pod": "", "cntr": 0, "profit": 0, "armador": ""}, {"semana": "Semana 2", "cliente": "REALIZADO META JANEIRO", "pol": "101842", "pod": "", "cntr": 0, "profit": 0, "armador": ""}, {"semana": "Semana 2", "cliente": "FALTA PARA ATINGIR A META - JANEIRO", "pol": "78158", "pod": "", "cntr": 0, "profit": 0, "armador": ""}, {"semana": "Semana 2", "cliente": "TOAL DE CONTEINERES JANEIRO", "pol": "295", "pod": "", "cntr": 0, "profit": 0, "armador": ""}]}, "fevereiro": {"semanas": [{"nome": "Semana 5", "periodo": "02/02 a 06/02"}], "fechamentos": [{"semana": "Semana 5", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "SAINT PETERSBURG", "cntr": 1, "profit": 563.0, "armador": "MSC"}, {"semana": "Semana 5", "cliente": "COPLANA", "pol": "SSZ", "pod": "ROTTERDAM", "cntr": 2, "profit": 1376.0, "armador": "MSC"}, {"semana": "Semana 5", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "CONSTANTA", "cntr": 1, "profit": 398.0, "armador": "HAPAG"}, {"semana": "Semana 5", "cliente": "COPLANA", "pol": "SSZ", "pod": "ROTTERDAM (FOB)", "cntr": 4, "profit": 1941.0, "armador": "MSC"}, {"semana": "Semana 5", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "VIGO", "cntr": 1, "profit": 338.0, "armador": "MSC"}, {"semana": "Semana 5", "cliente": "MGV", "pol": "SSZ", "pod": "CONSTANTA", "cntr": 1, "profit": 423.0, "armador": "MSC"}, {"semana": "Semana 5", "cliente": "COPLANA", "pol": "SSZ", "pod": "SAINT PETERSBURG", "cntr": 5, "profit": 10065.0, "armador": "MSC"}, {"semana": "Semana 5", "cliente": "COPLANA", "pol": "SSZ", "pod": "CONSTANTA", "cntr": 1, "profit": 138.0, "armador": "MSC"}, {"semana": "Semana 5", "cliente": "INTERLOGGING", "pol": "SSZ", "pod": "DURBAN", "cntr": 8, "profit": 1376.0, "armador": "HAPAG"}, {"semana": "Semana 5", "cliente": "STEFENONI", "pol": "VIX", "pod": "GIOIA TAURO", "cntr": 1, "profit": 542.0, "armador": "MSC"}, {"semana": "Semana 5", "cliente": "AGOSTINHO", "pol": "SSZ", "pod": "ALGIERS", "cntr": 5, "profit": 380.0, "armador": "MSC"}, {"semana": "Semana 5", "cliente": "CAP", "pol": "SSZ", "pod": "GDANSK", "cntr": 2, "profit": 236.0, "armador": "MSC"}, {"semana": "Semana 5", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "BUENAVENTURA", "cntr": 2, "profit": 1805.0, "armador": "COSCO"}, {"semana": "Semana 5", "cliente": "COPLANA", "pol": "SSZ", "pod": "ROTTERDAM (FOB)", "cntr": 4, "profit": 1941.0, "armador": "MSC"}, {"semana": "Semana 5", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "SAINT PETERSBURG", "cntr": 10, "profit": 5405.0, "armador": "MSC"}, {"semana": "Semana 5", "cliente": "BEATRICE", "pol": "PNG", "pod": "VALENCIA", "cntr": 1, "profit": 53.0, "armador": "MSC"}]}, "metas": {"meta_anual": 2160000, "meta_mensal": 180000.0, "realizado_janeiro": 101842, "realizado_fevereiro": 26980}};
-
-        // Ícones
-        const Ship = ({ className, strokeWidth = 2 }) => (
-            <svg className={className} strokeWidth={strokeWidth} viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path>
-                <path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"></path>
-                <path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"></path>
-                <path d="M12 10v4"></path>
-                <path d="M12 2v3"></path>
-            </svg>
-        );
+        const DADOS_COMPLETOS = {
+  "janeiro": {
+    "semanas": [
+      {"nome": "Semana 1", "periodo": "02/01 a 09/01"},
+      {"nome": "Semana 2", "periodo": "12/01 a 16/01"},
+      {"nome": "Semana 3", "periodo": "19/01 a 23/01"},
+      {"nome": "Semana 4", "periodo": "26/01 a 30/01"}
+    ],
+    "fechamentos": [
+      {"semana": "Semana 1", "cliente": "CAMAP", "pol": "SSZ", "pod": "DURBAN", "cntr": 2, "profit": 374, "armador": "HAPAG"},
+      {"semana": "Semana 1", "cliente": "CASUL", "pol": "SSZ", "pod": "QINGDAO", "cntr": 10, "profit": 4290, "armador": "MAERSK"},
+      {"semana": "Semana 1", "cliente": "CASUL", "pol": "SSZ", "pod": "QINGDAO", "cntr": 10, "profit": 4090, "armador": "MAERSK"},
+      {"semana": "Semana 1", "cliente": "MGV", "pol": "SSZ", "pod": "QINGDAO", "cntr": 4, "profit": 1936, "armador": "MSC"},
+      {"semana": "Semana 1", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "TALLINN", "cntr": 8, "profit": 1920, "armador": "MSC"},
+      {"semana": "Semana 1", "cliente": "MGV", "pol": "SSZ", "pod": "SAINT PETERSBURG (FOB)", "cntr": 2, "profit": 883, "armador": "MSC"},
+      {"semana": "Semana 1", "cliente": "DEGAN", "pol": "SSZ", "pod": "BUENAVENTURA", "cntr": 4, "profit": 808, "armador": "CMA"},
+      {"semana": "Semana 1", "cliente": "COPLANA", "pol": "SSZ", "pod": "CALLAO", "cntr": 1, "profit": 2140, "armador": "MAERSK"},
+      {"semana": "Semana 1", "cliente": "MGV", "pol": "SSZ", "pod": "CONSTANTA", "cntr": 2, "profit": 850, "armador": "MSC"},
+      {"semana": "Semana 1", "cliente": "STEFENONI", "pol": "VIX", "pod": "KARACHI", "cntr": 1, "profit": 616, "armador": "MAERSK"},
+      {"semana": "Semana 1", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "CONSTANTA", "cntr": 2, "profit": 850, "armador": "MSC"},
+      {"semana": "Semana 1", "cliente": "MGV", "pol": "SSZ", "pod": "CONSTANTA", "cntr": 6, "profit": 6642, "armador": "MAERSK"},
+      {"semana": "Semana 1", "cliente": "MGV", "pol": "SSZ", "pod": "KLAIPEDA", "cntr": 2, "profit": 168, "armador": "MAERSK"},
+      {"semana": "Semana 1", "cliente": "BEATRICE", "pol": "PNG", "pod": "MERSIN", "cntr": 2, "profit": 298, "armador": "MSC"},
+      {"semana": "Semana 1", "cliente": "COPLANA", "pol": "SSZ", "pod": "ROTTERDAM (FOB)", "cntr": 4, "profit": 1941, "armador": "MSC"},
+      {"semana": "Semana 1", "cliente": "BEATRICE", "pol": "PNG", "pod": "VALENCIA", "cntr": 1, "profit": 55, "armador": "MSC"},
+      {"semana": "Semana 1", "cliente": "BEATRICE", "pol": "PNG", "pod": "VALENCIA", "cntr": 9, "profit": 495, "armador": "MSC"},
+      {"semana": "Semana 1", "cliente": "CASUL", "pol": "SSZ", "pod": "QINGDAO", "cntr": 10, "profit": 3700, "armador": "PIL"},
+      {"semana": "Semana 1", "cliente": "BEATRICE", "pol": "PNG", "pod": "SAINT PETERSBURG", "cntr": 3, "profit": 1360, "armador": "MSC"},
+      {"semana": "Semana 1", "cliente": "COPLANA", "pol": "SSZ", "pod": "ROTTERDAM", "cntr": 2, "profit": 1407, "armador": "MSC"},
+      {"semana": "Semana 1", "cliente": "COPLANA", "pol": "SSZ", "pod": "BUENAVENTURA", "cntr": 2, "profit": 1327, "armador": "CMA"},
+      {"semana": "Semana 1", "cliente": "DEGAN", "pol": "SSZ", "pod": "BUENAVENTURA", "cntr": 1, "profit": 218, "armador": "CMA"},
+      {"semana": "Semana 1", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "TALLINN", "cntr": 3, "profit": 708, "armador": "MSC"},
+      {"semana": "Semana 2", "cliente": "STEFENONI", "pol": "PNG", "pod": "JEDDAH", "cntr": 1, "profit": 263, "armador": "MAERSK"},
+      {"semana": "Semana 2", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "TALLINN", "cntr": 4, "profit": 960, "armador": "MSC"},
+      {"semana": "Semana 2", "cliente": "CAP", "pol": "SSZ", "pod": "KLAIPEDA", "cntr": 1, "profit": 120, "armador": "MSC"},
+      {"semana": "Semana 2", "cliente": "COPLANA", "pol": "SSZ", "pod": "NOVOROSSIYSK", "cntr": 6, "profit": 7118, "armador": "MSC"},
+      {"semana": "Semana 2", "cliente": "CAP", "pol": "SSZ", "pod": "TALLINN", "cntr": 2, "profit": 240, "armador": "MSC"},
+      {"semana": "Semana 2", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "TALLINN", "cntr": 2, "profit": 472, "armador": "MSC"},
+      {"semana": "Semana 2", "cliente": "COPLANA", "pol": "SSZ", "pod": "SAINT PETERSBURG", "cntr": 3, "profit": 6039, "armador": "MSC"},
+      {"semana": "Semana 2", "cliente": "COPLANA", "pol": "SSZ", "pod": "NOVOROSSIYSK", "cntr": 1, "profit": 1203, "armador": "MSC"},
+      {"semana": "Semana 2", "cliente": "INTER LOGGING", "pol": "SSZ", "pod": "TALLINN (FOB)", "cntr": 4, "profit": 400, "armador": "MAERSK"},
+      {"semana": "Semana 2", "cliente": "CAP", "pol": "SSZ", "pod": "TALLINN", "cntr": 13, "profit": 1560, "armador": "MSC"},
+      {"semana": "Semana 2", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "ROTTERDAM", "cntr": 18, "profit": 1800, "armador": "MSC"},
+      {"semana": "Semana 2", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "POTI", "cntr": 4, "profit": 1610, "armador": "MSC"},
+      {"semana": "Semana 2", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "THESSALONIKI", "cntr": 2, "profit": 600, "armador": "MAERSK"},
+      {"semana": "Semana 2", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "TALLINN", "cntr": 4, "profit": 960, "armador": "MSC"},
+      {"semana": "Semana 2", "cliente": "DEGAN", "pol": "SSZ", "pod": "BUENAVENTURA", "cntr": 1, "profit": 218, "armador": "CMA"},
+      {"semana": "Semana 3", "cliente": "BEATRICE", "pol": "PNG", "pod": "SAINT PETERSBURG", "cntr": 10, "profit": 4550, "armador": "MSC"},
+      {"semana": "Semana 3", "cliente": "CASUL", "pol": "SSZ", "pod": "QINGDAO", "cntr": 10, "profit": 1360, "armador": "MSC"},
+      {"semana": "Semana 3", "cliente": "GBC", "pol": "SSZ", "pod": "ALGIERS", "cntr": 5, "profit": 725, "armador": "MSC"},
+      {"semana": "Semana 3", "cliente": "MGV", "pol": "SSZ", "pod": "QINGDAO", "cntr": 1, "profit": 270, "armador": "PIL"},
+      {"semana": "Semana 3", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "TALLINN", "cntr": 3, "profit": 708, "armador": "MSC"},
+      {"semana": "Semana 3", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "GYDNIA", "cntr": 4, "profit": 1560, "armador": "MSC"},
+      {"semana": "Semana 3", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "TALLINN", "cntr": 2, "profit": 472, "armador": "MSC"},
+      {"semana": "Semana 3", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "DURBAN", "cntr": 3, "profit": 1611, "armador": "HAPAG"},
+      {"semana": "Semana 3", "cliente": "COPLANA", "pol": "SSZ", "pod": "POTI", "cntr": 1, "profit": 240, "armador": "MSC"},
+      {"semana": "Semana 3", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "GDANSK", "cntr": 3, "profit": 870, "armador": "MSC"},
+      {"semana": "Semana 3", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "HAMBURG", "cntr": 1, "profit": 340, "armador": "MSC"},
+      {"semana": "Semana 3", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "SAINT PETERSBURG", "cntr": 2, "profit": 1105, "armador": "MSC"},
+      {"semana": "Semana 3", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "ROTTERDAM", "cntr": 2, "profit": 680, "armador": "MSC"},
+      {"semana": "Semana 3", "cliente": "COPLANA", "pol": "SSZ", "pod": "CONSTANTA", "cntr": 2, "profit": 480, "armador": "MSC"},
+      {"semana": "Semana 3", "cliente": "CAP", "pol": "SSZ", "pod": "RIGA", "cntr": 3, "profit": 360, "armador": "MSC"},
+      {"semana": "Semana 3", "cliente": "INTER LOGGING", "pol": "SSZ", "pod": "TALLINN (FOB)", "cntr": 8, "profit": 800, "armador": "MAERSK"},
+      {"semana": "Semana 3", "cliente": "AMENCO", "pol": "SSZ", "pod": "DURBAN", "cntr": 4, "profit": 748, "armador": "HAPAG"},
+      {"semana": "Semana 3", "cliente": "AMENCO", "pol": "SSZ", "pod": "CONSTANTA", "cntr": 2, "profit": 108, "armador": "HAPAG"},
+      {"semana": "Semana 3", "cliente": "BEATRICE", "pol": "PNG", "pod": "VALENCIA", "cntr": 5, "profit": 275, "armador": "MSC"},
+      {"semana": "Semana 3", "cliente": "CAMAP", "pol": "SSZ", "pod": "ALGIERS", "cntr": 5, "profit": 1000, "armador": "MSC"},
+      {"semana": "Semana 3", "cliente": "COPLANA", "pol": "SSZ", "pod": "TALLINN (FOB)", "cntr": 5, "profit": 500, "armador": "MAERSK"},
+      {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "DURBAN", "cntr": 4, "profit": 2148, "armador": "HAPAG"},
+      {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "SAINT PETERSBURG", "cntr": 2, "profit": 1105, "armador": "MSC"},
+      {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "LONDON GATEWAY", "cntr": 1, "profit": 290, "armador": "MSC"},
+      {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "VALENCIA", "cntr": 1, "profit": 340, "armador": "MSC"},
+      {"semana": "Semana 4", "cliente": "CONNECT", "pol": "SSZ", "pod": "BRISBANE (FOB)", "cntr": 1, "profit": 200, "armador": "MAERSK"},
+      {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "ROTTERDAM", "cntr": 6, "profit": 2628, "armador": "MSC"},
+      {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "SAINT PETERSBURG", "cntr": 3, "profit": 1645, "armador": "MSC"},
+      {"semana": "Semana 4", "cliente": "CAP", "pol": "SSZ", "pod": "KLAIPEDA", "cntr": 1, "profit": 120, "armador": "MSC"},
+      {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "BUENAVENTURA", "cntr": 3, "profit": 2705, "armador": "COSCO"},
+      {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "GDANSK", "cntr": 4, "profit": 1160, "armador": "MSC"},
+      {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "ROTTERDAM", "cntr": 1, "profit": 340, "armador": "MSC"},
+      {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "DURBAN", "cntr": 3, "profit": 1611, "armador": "HAPAG"},
+      {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "CONSTANTA", "cntr": 3, "profit": 1194, "armador": "HAPAG"},
+      {"semana": "Semana 4", "cliente": "GBC", "pol": "SSZ", "pod": "DURBAN", "cntr": 2, "profit": 374, "armador": "HAPAG"},
+      {"semana": "Semana 4", "cliente": "COPLANA", "pol": "SSZ", "pod": "NOVOROSSIYSK", "cntr": 1, "profit": 1203, "armador": "MSC"},
+      {"semana": "Semana 4", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "ROTTERDAM", "cntr": 6, "profit": 2640, "armador": "MSC"},
+      {"semana": "Semana 4", "cliente": "CAP", "pol": "SSZ", "pod": "RIGA", "cntr": 2, "profit": 240, "armador": "MSC"},
+      {"semana": "Semana 4", "cliente": "BEATRICE", "pol": "PNG", "pod": "SAINT PETERSBURG", "cntr": 4, "profit": 1855, "armador": "MSC"},
+      {"semana": "Semana 4", "cliente": "GBC", "pol": "SSZ", "pod": "ALGIERS", "cntr": 5, "profit": 725, "armador": "MSC"},
+      {"semana": "Semana 4", "cliente": "COPLANA", "pol": "SSZ", "pod": "CALLAO", "cntr": 1, "profit": 1200, "armador": "MAERSK"}
+    ]
+  },
+  "fevereiro": {
+    "semanas": [
+      {"nome": "Semana 5", "periodo": "02/02 a 06/02"},
+      {"nome": "Semana 6", "periodo": "09/02 a 13/02"},
+      {"nome": "Semana 7", "periodo": "16/02 a 20/02"}
+    ],
+    "fechamentos": [
+      {"semana": "Semana 5", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "SAINT PETERSBURG", "cntr": 2, "profit": 1101, "armador": "MSC"},
+      {"semana": "Semana 5", "cliente": "COPLANA", "pol": "SSZ", "pod": "ROTTERDAM", "cntr": 2, "profit": 1376, "armador": "MSC"},
+      {"semana": "Semana 5", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "CONSTANTA", "cntr": 1, "profit": 398, "armador": "HAPAG"},
+      {"semana": "Semana 5", "cliente": "COPLANA", "pol": "SSZ", "pod": "ROTTERDAM (FOB)", "cntr": 4, "profit": 2069, "armador": "MSC"},
+      {"semana": "Semana 5", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "VIGO", "cntr": 1, "profit": 388, "armador": "MSC"},
+      {"semana": "Semana 5", "cliente": "MGV", "pol": "SSZ", "pod": "CONSTANTA", "cntr": 1, "profit": 423, "armador": "MSC"},
+      {"semana": "Semana 5", "cliente": "COPLANA", "pol": "SSZ", "pod": "SAINT PETERSBURG", "cntr": 5, "profit": 10065, "armador": "MSC"},
+      {"semana": "Semana 5", "cliente": "COPLANA", "pol": "SSZ", "pod": "CONSTANTA", "cntr": 2, "profit": 276, "armador": "MSC"},
+      {"semana": "Semana 5", "cliente": "INTERLOGGING", "pol": "SSZ", "pod": "DURBAN", "cntr": 8, "profit": 1296, "armador": "HAPAG"},
+      {"semana": "Semana 5", "cliente": "STEFENONI", "pol": "VIX", "pod": "GIOIA TAURO", "cntr": 1, "profit": 542, "armador": "MSC"},
+      {"semana": "Semana 5", "cliente": "AGOSTINHO", "pol": "SSZ", "pod": "ALGIERS", "cntr": 5, "profit": 380, "armador": "MSC"},
+      {"semana": "Semana 5", "cliente": "CAP", "pol": "SSZ", "pod": "GDANSK", "cntr": 2, "profit": 236, "armador": "MSC"},
+      {"semana": "Semana 5", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "BUENAVENTURA", "cntr": 2, "profit": 1805, "armador": "COSCO"},
+      {"semana": "Semana 5", "cliente": "COPLANA", "pol": "SSZ", "pod": "ROTTERDAM (FOB)", "cntr": 4, "profit": 2069, "armador": "MSC"},
+      {"semana": "Semana 5", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "SAINT PETERSBURG", "cntr": 10, "profit": 5405, "armador": "MSC"},
+      {"semana": "Semana 5", "cliente": "BEATRICE", "pol": "PNG", "pod": "VALENCIA", "cntr": 1, "profit": 53, "armador": "MSC"},
+      {"semana": "Semana 6", "cliente": "COPLANA", "pol": "SSZ", "pod": "ROTTERDAM (DDP)", "cntr": 3, "profit": 2982, "armador": "MSC"},
+      {"semana": "Semana 6", "cliente": "BEATRICE", "pol": "PNG", "pod": "ALGIERS", "cntr": 4, "profit": 573, "armador": "MSC"},
+      {"semana": "Semana 6", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "CONSTANTA", "cntr": 4, "profit": 1700, "armador": "MSC"},
+      {"semana": "Semana 6", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "ROTTERDAM", "cntr": 4, "profit": 1152, "armador": "MSC"},
+      {"semana": "Semana 6", "cliente": "CAP", "pol": "SSZ", "pod": "AMSTERDAM", "cntr": 4, "profit": 944, "armador": "MSC"},
+      {"semana": "Semana 6", "cliente": "COPLANA", "pol": "SSZ", "pod": "ROTTERDAM (FOB)", "cntr": 4, "profit": 2069, "armador": "MSC"},
+      {"semana": "Semana 6", "cliente": "STEFENONI", "pol": "VIX", "pod": "KOPER", "cntr": 1, "profit": 558, "armador": "MAERSK"},
+      {"semana": "Semana 6", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "DURBAN", "cntr": 3, "profit": 1611, "armador": "HAPAG"},
+      {"semana": "Semana 6", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "GDANSK", "cntr": 1, "profit": 288, "armador": "MSC"},
+      {"semana": "Semana 6", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "DURBAN", "cntr": 6, "profit": 3222, "armador": "HAPAG"},
+      {"semana": "Semana 6", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "CONSTANTA", "cntr": 3, "profit": 1239, "armador": "MSC"},
+      {"semana": "Semana 6", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "SAINT PETERSBURG", "cntr": 7, "profit": 3791, "armador": "MSC"},
+      {"semana": "Semana 6", "cliente": "COPLANA", "pol": "SSZ", "pod": "CALLAO (FOB)", "cntr": 1, "profit": 747, "armador": "HAPAG"},
+      {"semana": "Semana 6", "cliente": "COPLANA", "pol": "SSZ", "pod": "CALLAO", "cntr": 1, "profit": 680, "armador": "MAERSK"},
+      {"semana": "Semana 7", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "SAINT PETERSBURG", "cntr": 2, "profit": 1101, "armador": "MSC"},
+      {"semana": "Semana 7", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "VALENCIA", "cntr": 1, "profit": 340, "armador": "MSC"},
+      {"semana": "Semana 7", "cliente": "BEATRICE", "pol": "PNG", "pod": "SAINT PETERSBURG", "cntr": 3, "profit": 1410, "armador": "MSC"},
+      {"semana": "Semana 7", "cliente": "CAP", "pol": "SSZ", "pod": "AMSTERDAM", "cntr": 3, "profit": 708, "armador": "MSC"},
+      {"semana": "Semana 7", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "SAINT PETERSBURG", "cntr": 5, "profit": 2715, "armador": "MSC"},
+      {"semana": "Semana 7", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "DURBAN", "cntr": 2, "profit": 1726, "armador": "HAPAG"},
+      {"semana": "Semana 7", "cliente": "CAP", "pol": "SSZ", "pod": "AMSTERDAM", "cntr": 3, "profit": 708, "armador": "MSC"},
+      {"semana": "Semana 7", "cliente": "CAP", "pol": "SSZ", "pod": "KLAIPEDA", "cntr": 1, "profit": 118, "armador": "MSC"},
+      {"semana": "Semana 7", "cliente": "GBC", "pol": "SSZ", "pod": "DURBAN", "cntr": 3, "profit": 561, "armador": "HAPAG"},
+      {"semana": "Semana 7", "cliente": "STEFENONI", "pol": "VIX", "pod": "MERSIN", "cntr": 1, "profit": 450, "armador": "MSC"},
+      {"semana": "Semana 7", "cliente": "HB ZANCHETTA", "pol": "SSZ", "pod": "VARNA", "cntr": 1, "profit": 95, "armador": "MAERSK"},
+      {"semana": "Semana 7", "cliente": "CAP", "pol": "SSZ", "pod": "LONDON GATEWAY", "cntr": 3, "profit": 264, "armador": "MSC"},
+      {"semana": "Semana 7", "cliente": "BEATRICE", "pol": "PNG", "pod": "VALENCIA", "cntr": 1, "profit": 53, "armador": "MSC"},
+      {"semana": "Semana 7", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "SAINT PETERSBURG", "cntr": 4, "profit": 1352, "armador": "MSC"},
+      {"semana": "Semana 7", "cliente": "COPLANA", "pol": "SSZ", "pod": "KLAIPEDA", "cntr": 4, "profit": 400, "armador": "MAERSK"},
+      {"semana": "Semana 7", "cliente": "COPLANA", "pol": "SSZ", "pod": "ROTTERDAM (FOB)", "cntr": 5, "profit": 2580, "armador": "MSC"},
+      {"semana": "Semana 7", "cliente": "COPLANA", "pol": "SSZ", "pod": "JEBEL ALI", "cntr": 1, "profit": 533, "armador": "CMA"},
+      {"semana": "Semana 7", "cliente": "STEFENONI", "pol": "VIX", "pod": "ASHDOD", "cntr": 2, "profit": 626, "armador": "MAERSK"},
+      {"semana": "Semana 7", "cliente": "GBC", "pol": "SSZ", "pod": "DURBAN", "cntr": 2, "profit": 374, "armador": "HAPAG"},
+      {"semana": "Semana 7", "cliente": "COPLANA", "pol": "SSZ", "pod": "NOVOROSSIYSK", "cntr": 1, "profit": 1203, "armador": "MSC"},
+      {"semana": "Semana 7", "cliente": "AMENDOGRAOS", "pol": "PNG", "pod": "CONSTANTA", "cntr": 9, "profit": 1323, "armador": "MAERSK"},
+      {"semana": "Semana 7", "cliente": "AMENDOGRAOS", "pol": "PNG", "pod": "CONSTANTA", "cntr": 9, "profit": 1881, "armador": "HAPAG"},
+      {"semana": "Semana 7", "cliente": "AMENDOGRAOS", "pol": "PNG", "pod": "ALTAMIRA", "cntr": 2, "profit": 240, "armador": "COSCO"},
+      {"semana": "Semana 7", "cliente": "GBC", "pol": "SSZ", "pod": "DURBAN", "cntr": 3, "profit": 561, "armador": "HAPAG"},
+      {"semana": "Semana 7", "cliente": "INTER LOGGING", "pol": "SSZ", "pod": "TALLINN (FOB)", "cntr": 4, "profit": 400, "armador": "MAERSK"},
+      {"semana": "Semana 7", "cliente": "KUT KO", "pol": "SSZ", "pod": "SAINT PETERSBURG (FOB)", "cntr": 3, "profit": 150, "armador": "MSC"},
+      {"semana": "Semana 7", "cliente": "COPLANA", "pol": "SSZ", "pod": "RIGA", "cntr": 8, "profit": 2536, "armador": "MAERSK"},
+      {"semana": "Semana 7", "cliente": "INTER LOGGING", "pol": "SSZ", "pod": "JEBEL ALI", "cntr": 4, "profit": 451, "armador": "CMA"},
+      {"semana": "Semana 7", "cliente": "TERRANUTS", "pol": "SSZ", "pod": "DURBAN", "cntr": 12, "profit": 6444, "armador": "HAPAG"}
+    ]
+  },
+  "metas": {
+    "meta_anual": 2160000,
+    "meta_mensal": 180000,
+    "realizado_janeiro": 103124,
+    "realizado_fevereiro": 80741
+  }
+};
 
         const Home = ({ className, strokeWidth = 2 }) => (
             <svg className={className} strokeWidth={strokeWidth} viewBox="0 0 24 24" fill="none" stroke="currentColor">
